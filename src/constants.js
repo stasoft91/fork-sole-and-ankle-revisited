@@ -16,3 +16,20 @@ export const WEIGHTS = {
   medium: 600,
   bold: 800,
 };
+
+export const BREAKPOINTS = {
+  tabletMin: 600,
+  laptopMin: 950,
+  desktopMin: 1300,
+}
+
+// Converted to rems:
+export const QUERIES = {
+  'tabletAndUp': `(min-width: ${BREAKPOINTS.tabletMin / 16}rem)`,
+  'laptopAndUp': `(min-width: ${BREAKPOINTS.laptopMin / 16}rem)`,
+  'desktopAndUp': `(min-width: ${BREAKPOINTS.desktopMin / 16}rem)`,
+
+  'phone': `(max-width: ${BREAKPOINTS.tabletMin / 16}rem)`,
+  'tabletAndDown': `(max-width: ${BREAKPOINTS.laptopMin / 16}rem)`,
+  'laptopAndDown': `(max-width: ${BREAKPOINTS.desktopMin / 16}rem)`,
+}

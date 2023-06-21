@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { COLORS, WEIGHTS } from '../../constants';
+import {COLORS, QUERIES, WEIGHTS} from '../../constants';
 import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
+import Icon from "../Icon";
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -22,14 +23,28 @@ const Header = () => {
           <Logo />
         </Side>
         <Nav>
-          <NavLink href="/sale">Sale</NavLink>
+          <NavLink href="/sale">dumbSales</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
+          <NavLink href="/men">Manliest</NavLink>
+          <NavLink href="/women">Woman</NavLink>
+          <NavLink href="/kids">KidsAreDumb</NavLink>
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
-        <Side />
+        <Side>
+            <MobileNav>
+                <Button>
+                    <Icon id="shopping-bag" strokeWidth={2}  color={COLORS.gray["900"]} />
+                </Button>
+
+                <Button>
+                    <Icon id="search" strokeWidth={2}  color={COLORS.gray["900"]}/>
+                </Button>
+
+                <Button onClick={() => setShowMobileMenu(true)}>
+                    <Icon id="menu" strokeWidth={2} color={COLORS.gray["900"]}/>
+                </Button>
+            </MobileNav>
+        </Side>
       </MainHeader>
 
       <MobileMenu
@@ -40,22 +55,63 @@ const Header = () => {
   );
 };
 
+const Button = styled.button`
+    padding: 8px 6px;
+    border-radius: 2px;
+    border: none;
+    background-color: transparent;
+    color: ${COLORS.gray["900"]};
+    cursor: pointer;
+`;
+
 const MainHeader = styled.div`
   display: flex;
-  align-items: baseline;
+  align-items: center;
   padding: 18px 32px;
-  height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+  overflow-x: auto;
+
+  @media ${QUERIES.tabletAndDown} {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media ${QUERIES.phone} {
+    padding: 18px 16px;
+  }
 `;
 
 const Nav = styled.nav`
   display: flex;
+  gap: clamp(1rem, -4.5rem + 9.2vw, 3.5rem);
+  margin: 0 clamp(1rem, -4.5rem + 9.2vw, 3.5rem);
+  
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
+`;
+
+const MobileNav = styled.nav`
+  display: none;
   gap: 48px;
-  margin: 0px 48px;
+
+  @media ${QUERIES.tabletAndDown} {
+    gap: 32px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media ${QUERIES.phone} {
+    gap: 16px;
+  }
 `;
 
 const Side = styled.div`
   flex: 1;
+
+  @media ${QUERIES.tabletAndDown} {
+    flex: revert;
+  }
 `;
 
 const NavLink = styled.a`
